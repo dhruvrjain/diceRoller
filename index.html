@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="static/css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dice Roller App</title>
+</head>
+<body>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <div id="app"></div>
+    <script type="text/jsx">
+        const app=document.getElementById('app');
+        const root = ReactDOM.createRoot(app);
+
+        function HomePage({children}){
+            return <>
+                <div className="body">
+                    <div className="content">
+                        {children}
+                    </div>
+                </div>
+            </>
+        }
+
+        function Button({onCLick}){
+            return <>
+                <button className="btn" onClick={onCLick}>Roll the Dice</button>
+            </>
+        }
+
+        function App(){
+            const [faceNum,setFaceNum]=React.useState(1);
+
+            function rollDice(){
+                const num=Math.ceil(Math.random()*6);
+                setFaceNum(num);
+            }
+
+            return <HomePage>
+                <h1>A simple Dice Roller app</h1>
+                <img className="diceImage" src={"./static/images/dice-"+faceNum+".png"} alt={"Dice face "+(faceNum)} />
+                <Button onCLick={rollDice}/>
+            </HomePage>
+        }
+
+        root.render(<App/>);
+    </script>
+</body>
+</html>
